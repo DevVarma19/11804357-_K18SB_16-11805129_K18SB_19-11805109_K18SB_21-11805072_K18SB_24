@@ -66,7 +66,6 @@ y = dataset.iloc[:, -1].values
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 0)
 
-#EXPLORATORY DATA ANALYSIS
 X_train["Name"].value_counts()
 make_train = X_train["Name"].str.split(" ", expand=True)
 make_test  = X_test["Name"].str.split(" ", expand=True)
@@ -75,10 +74,49 @@ make_test  = X_test["Name"].str.split(" ", expand=True)
 X_train["Manufacturer"] = make_train[0]
 X_test["Manufacturer"] = make_test[0]
 
-#I will drop the Name column as we don't need that
-X_train.drop("Name", axis = 1)
-X_test.drop("Name", axis = 1)
+#Extracting the numerical values of Milage, Engine, Power
+milage_train = X_train["Mileage"].str.split(" ", expand=True)
+milage_test = X_test["Mileage"].str.split(" ", expand=True)
+X_train["Mileage"] = pd.to_numeric(milage_train[0], errors = 'coerce')
+X_test["Mileage"] = pd.to_numeric(milage_test[0], errors = 'coerce')
 
+engine_train = X_train["Engine"].str.split(" ", expand=True)
+engine_test  = X_test["Engine"].str.split(" ", expand=True)
+X_train["Engine"] = pd.to_numeric(engine_train[0], errors = 'coerce')
+X_test["Engine"]  = pd.to_numeric(engine_test[0], errors = 'coerce')
+
+power_train = X_train["Power"].str.split(" ", expand=True)
+power_test  = X_test["Power"].str.split(" ", expand=True)
+X_train["Power"] = pd.to_numeric(power_train[0], errors = 'coerce')
+X_test["Power"]  = pd.to_numeric(power_test[0], errors = 'coerce') 
+
+#Replacing the Null values with Mean of all the values in that column
+X_train["Engine"].fillna(X_train["Engine"].astype("float64").mean(), inplace = True)
+X_test["Engine"].fillna(X_train["Engine"].astype("float64").mean(), inplace = True)
+
+X_train["Mileage"].fillna(X_train["Mileage"].astype("float64").mean(), inplace = True)
+X_test["Mileage"].fillna(X_train["Mileage"].astype("float64").mean(), inplace = True)
+
+X_train["Power"].fillna(X_train["Power"].astype("float64").mean(), inplace = True)
+X_test["Power"].fillna(X_train["Power"].astype("float64").mean(), inplace = True)
+
+X_train["Seats"].fillna(X_train["Seats"].astype("float64").mean(), inplace = True)
+X_test["Seats"].fillna(X_train["Seats"].astype("float64").mean(), inplace = True)
+
+#Dropping all the unnecessary columns in the dataset
+#Name is no longer required as we are considering the Manufacturer as the sole base.
+X_train = X_train.drop("Name", axis = 1)
+X_test = X_test.drop("Name", axis = 1)
+#Location should not determine the price of the car.
+X_train = X_train.drop("Location", axis = 1)
+X_test = X_test.drop("Location", axis = 1)
+#Year has no significance unless we consider how old the given car is
+X_train = X_train.drop("Year", axis = 1)
+X_test = X_test.drop("Year", axis = 1)
+
+
+
+#EXPLORATORY DATA ANALYSIS
 #Manufacturers VS Number of cars plotting
 plt.figure(figsize = (14, 10))
 plot = sns.countplot( x = "Manufacturer", data = X_train)
@@ -89,7 +127,7 @@ for p in plot.patches:
                         (p.get_x() + p.get_width() / 2.0, 
                          p.get_height()), 
                         ha = 'center', 
-                        va = 'center', 
+                        va = 'center',
                         xytext = (0, 5),
                         textcoords = 'offset points')
 
@@ -97,4 +135,55 @@ plt.title("Count of cars based on manufacturers")
 plt.xlabel("Manufacturer")
 plt.ylabel("Count of cars")
 plt.show()  
+
+#Categorical Data
+#let's create dummy columns for categorical columns before we begin training.
+X_train = pd.get_dummies(X_train,
+                         columns = ["Manufacturer", "Fuel_Type", "Transmission", "Owner_Type"],
+                         drop_first = True)
+X_test = pd.get_dummies(X_test,
+                         columns = ["Manufacturer", "Fuel_Type", "Transmission", "Owner_Type"],
+                         drop_first = True)
+#It might be possible that the dummy column creation would be different in test and train data, thus, I'd fill in all missing columns with zeros
+missing_cols = set(X_train.columns) - set(X_test.columns)
+for col in missing_cols:
+    X_test[col] = 0
+X_test = X_test[X_train.columns]
+
+#Feature Scaling the data
+from sklearn.preprocessing import StandardScaler
+sc_X = StandardScaler()
+X_train = sc_X.fit_transform(X_train)
+X_test = sc_X.transform(X_test)
+sc_y = StandardScaler()
+y_train = y_train.reshape(-1, 1)
+y_train = sc_y.fit_transform(y_train)
+
+X_train.sum()
+y_train.sum()
+#Fitting simple Linear Regression to the Training set
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)
+#predicting the Test set results 
+y_pred = regressor.predict(X_test)
+
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(LinearRegression(), X_train, y_train, cv=5, scoring='r2')
+print(scores)
+
+from sklearn.metrics import r2_score
+r2_score(y_test, y_pred)
+'''
+    Output :- 0.730265013874368
+'''
+from sklearn.ensemble import RandomForestRegressor
+rf = RandomForestRegressor(n_estimators = 100)
+rf.fit(X_train, y_train.ravel())
+y_pred = rf.predict(X_test)
+r2_score(y_test, y_pred)
+
+
+
+
 
