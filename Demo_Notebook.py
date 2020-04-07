@@ -172,7 +172,6 @@ rf.fit(X_train, y_train.ravel())
 y_pred = rf.predict(X_test)
 r2_score(y_test, y_pred)
 
-
 '''
     Output : 0.8104532069495102
 '''
