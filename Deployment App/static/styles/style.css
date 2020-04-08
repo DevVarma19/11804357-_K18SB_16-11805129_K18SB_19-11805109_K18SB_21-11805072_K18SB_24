@@ -1,0 +1,162 @@
+/* 
+    Colors: #DE7119
+            #DEE3E2
+            #116979
+            #18B0B0
+*/
+
+
+body{
+    background-color: black;
+}
+header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.24), rgba(0, 0, 0, 0.24)), 
+        url(static/img2.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: auto;
+    background-attachment: fixed;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    margin-top: 280px;
+}
+
+.center a{
+    text-decoration: none;
+    font-size: 20px;
+    font-family: sans-serif;
+    color: #DEE3E2;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.center a:hover,
+.center a:active{
+    color: #DE7119
+}
+
+header img{
+    margin-top: 30px;
+    margin-left: 280px;
+}
+
+
+header p{
+    color: whitesmoke;
+    font-family: monospace;
+    font-size: 15px;
+    margin-top: 30px;
+    margin-left: 460px;
+}
+
+footer{
+    color: white;
+    font-family: sans-serif;
+    margin-left: 700px;
+}
+
+
+/*************Data**************/
+.data{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url(        url(url{{ url_for('static', filename='img/img2.jpg') }};
+);
+    background-size: cover;
+    background-position: center;
+    height: auto;
+    width: auto;
+    background-attachment: fixed;
+}
+
+img{
+    height: auto;
+    width: 1000px;
+    margin-left: 100px;
+}
+
+p{
+    color: whitesmoke;
+    font-family: sans-serif;
+    font-size: 20px;
+    margin-left: 475px;
+}
+
+h1{
+    color: white;
+    margin-left: 625px;
+}
+
+h3{
+    color: white;
+    font-family:cursive;
+}
+
+/*************Fuel**************/
+.form{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url({{ url_for('static', filename='img/img3.jpg') }});
+    background-size: cover;
+    background-position: center;
+    height: auto;
+    width: auto;
+    background-attachment: fixed;
+}
+.form p{
+    margin-left: 0px;
+    font-family:monospace;
+    font-style: italic;
+    font-size: 15px;
+    color: black;
+}
+
+.form h3{
+    color: black;
+}
+
+.form img{
+    width: 40%;
+    margin-left: 475px;
+}
+.container{
+    border-radius: 5px;
+    background-color: #DEE3E2;
+    padding: 20px;
+    width: 300px;
+    margin-left: 600px;
+    justify-content: center;
+}
+
+.container p input[type=text] {
+    padding: 3px 10px;
+    border-radius: 8px;
+}
+
+.container input[type=number] {
+  padding: 3px 10px;
+        border-radius: 8px;
+}
+
+.container select {
+  padding: 3px 10px;
+  border-radius: 8px;
+}
+
+.container select:hover {
+  padding: 3px 10px;
+  border-radius: 8px;
+    background-color: #DE7119;
+}
+
+input[type=submit] {
+    border-bottom-style: hidden;
+    border-radius: 7px;
+    width: 100%;
+    height: 30px;
+    margin-top: 10px;
+}
+
+input[type=submit]:hover {
+  background-color: #DE7119;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Analysis</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+</head>
+<body>
+   <div class="data">
+   <h1>
+       DATA&nbsp;&nbsp;ANALYSIS
+   </h1>
+    <p>
+        This Page contains all the analysis that we made on our Data.
+    </p>
+    <br><br>
+    <h3>
+        1. Manufacturer vs Count of cars
+    </h3><br>
+    <img src="{{url_for('static', filename='Graphs/carvsmanufac.png')}}">
+    <br>
+    <h3>
+        2. Kilometers covered vs Count of cars
+    </h3><br>
+    <img src="{{url_for('static', filename='Graphs/kilovscar.png')}}">
+    <br>
+    <h3>
+        3. Mileage vs Count of cars
+    </h3><br>
+    <img src="{{url_for('static', filename='Graphs/mileage.png')}}">
+    <br>
+    <h3>
+        4. No. of seats vs Count of cars
+    </h3><br>
+    <img src="{{url_for('static', filename='Graphs/seatsvscar.png')}}">
+    <br>
+    <h3>
+        5. Transmission vs Count of cars
+    </h3><br>
+    <img src="{{url_for('static', filename='Graphs/transmission.png')}}">
+    <br>
+    <h3>
+        6. FuelType vs Count of cars
+    </h3><br>
+    <img src="{{url_for('static', filename='Graphs/fueltypevscar.png')}}">
+    </div>
+</body>
+</html>

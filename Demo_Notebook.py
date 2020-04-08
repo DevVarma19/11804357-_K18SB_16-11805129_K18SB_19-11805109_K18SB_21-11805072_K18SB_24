@@ -123,10 +123,10 @@ plot = sns.countplot( x = "Manufacturer", data = X_train)
 plt.xticks(rotation = 90)
 #Annotating the plot
 for p in plot.patches:
-    plot.annotate(p.get_height(), 
-                        (p.get_x() + p.get_width() / 2.0, 
-                         p.get_height()), 
-                        ha = 'center', 
+    plot.annotate(p.get_height(),
+                        (p.get_x() + p.get_width() / 2.0,
+                         p.get_height()),
+                        ha = 'center',
                         va = 'center',
                         xytext = (0, 5),
                         textcoords = 'offset points')
@@ -134,7 +134,49 @@ for p in plot.patches:
 plt.title("Count of cars based on manufacturers")
 plt.xlabel("Manufacturer")
 plt.ylabel("Count of cars")
-plt.show()  
+
+plt.figure(figsize = (14, 10))
+plt.hist(X_train["Kilometers_Driven"], bins =[0, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000] )
+plt.xlabel("Kilometers Driven")
+plt.ylabel("Count of cars")
+plt.show()
+
+plt.figure(figsize = (14, 10))
+plt.bar(X_train["Fuel_Type"], height = np.arange(len(X_train["Fuel_Type"])), width = 0.4, color = ['red', 'blue', 'yellow', 'green'])
+plt.xlabel("Fuel Type")
+plt.ylabel("Count")
+plt.show()
+
+plt.figure(figsize = (14, 10))
+plt.bar(X_train["Transmission"], height = np.arange(len(X_train["Transmission"])), width = 0.4, color = ['orange','green'])
+plt.xlabel("Transmission")
+plt.ylabel("Count")
+plt.show()
+
+plt.figure(figsize = (14, 10))
+plt.bar(X_train["Owner_Type"], height = np.arange(len(X_train["Owner_Type"])), width = 0.4, color = ['orange','green'])
+plt.xlabel("Owner Type")
+plt.ylabel("Count")
+plt.show()
+
+plt.figure(figsize = (14, 10))
+plt.scatter(X_train["Mileage"], np.arange(len(X_train["Mileage"])), color = 'r')
+plt.xlabel("Mileage")
+plt.ylabel("Count")
+plt.show()
+
+plt.figure(figsize = (14, 10))
+plot = sns.countplot( x = "Seats", data = X_train)
+plt.xticks(rotation = 90)
+#Annotating the plot
+for p in plot.patches:
+    plot.annotate(p.get_height(),
+                        (p.get_x() + p.get_width() / 2,
+                         p.get_height()),
+                        ha = 'center',
+                        va = 'center',
+                        xytext = (0, 5),
+                        textcoords = 'offset points')
 
 #Categorical Data
 #let's create dummy columns for categorical columns before we begin training.
