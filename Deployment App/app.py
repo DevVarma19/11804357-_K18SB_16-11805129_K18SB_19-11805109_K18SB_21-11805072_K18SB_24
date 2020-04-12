@@ -8,7 +8,7 @@ from sklearn.ensemble import RandomForestRegressor
 # Create an app object
 app = Flask(__name__, static_url_path='/static')
 
-#Whenever this is called it will activate the function
+#Whenever this is called it will activate the functio
 @app.route('/')
 def home(): # initialize a web app with flask
 	return render_template('index.html') # template for user to add input to (front page)

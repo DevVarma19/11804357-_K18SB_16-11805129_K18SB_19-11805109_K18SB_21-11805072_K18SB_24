@@ -10,8 +10,10 @@ body{
     background-color: black;
 }
 header {
+/*
     background-image: linear-gradient(rgba(0, 0, 0, 0.24), rgba(0, 0, 0, 0.24)), 
         url(static/img2.jpg);
+*/
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -62,7 +64,7 @@ footer{
 
 /*************Data**************/
 .data{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url(        url(url{{ url_for('static', filename='img/img2.jpg') }};
+    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url(/static/img/img2.jpg);
 );
     background-size: cover;
     background-position: center;
@@ -74,7 +76,7 @@ footer{
 img{
     height: auto;
     width: 1000px;
-    margin-left: 100px;
+    margin-left: 250px;
 }
 
 p{
@@ -96,15 +98,14 @@ h3{
 
 /*************Fuel**************/
 .form{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url({{ url_for('static', filename='img/img3.jpg') }});
+    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url(/static/img/img3.jpg);
     background-size: cover;
     background-position: center;
     height: auto;
     width: auto;
     background-attachment: fixed;
 }
-.form p{
-    margin-left: 0px;
+.form p{    
     font-family:monospace;
     font-style: italic;
     font-size: 15px;
@@ -124,13 +125,18 @@ h3{
     background-color: #DEE3E2;
     padding: 20px;
     width: 300px;
-    margin-left: 600px;
+    margin-top: 100px;
+    margin-left: 550px;
     justify-content: center;
 }
 
+.container p{
+    margin-left: 0px;
+}
 .container p input[type=text] {
     padding: 3px 10px;
     border-radius: 8px;
+    margin-left: 10px;
 }
 
 .container input[type=number] {
@@ -159,4 +165,4 @@ input[type=submit] {
 
 input[type=submit]:hover {
   background-color: #DE7119;
-}
+} 
